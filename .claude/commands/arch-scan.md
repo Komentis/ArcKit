@@ -51,6 +51,7 @@ Once you have read those files, perform the scan in this order:
    - failure points, retry expectations, and idempotency requirements
    - AI architecture, if AI/LLMs/agents are present
    - observability/monitoring signals and notable gaps
+   - DevOps and infrastructure: CI/CD pipelines, IaC, environments, deployment strategy, networking, security infra, DR
 
 10. Produce the full architecture document using ARCH_DOC_TEMPLATE.md. Fill every section.
 
@@ -79,6 +80,7 @@ All file paths come from ARCH_CONFIG.md. Required outputs are:
 - AI architecture
 - Failure strategy
 - Observability
+- DevOps & infrastructure
 - Unknowns
 - Agent summary
 
@@ -113,6 +115,7 @@ Use exactly this structure:
 | [AI Architecture](./architecture/ai-architecture.md) | AI models, agents, and orchestration |
 | [Failure Strategy](./architecture/failure-strategy.md) | Failure points, retry behaviour, idempotency gaps |
 | [Observability](./architecture/observability.md) | Logging, telemetry, monitoring gaps |
+| [DevOps & Infrastructure](./architecture/devops.md) | CI/CD, IaC, environments, deployment, networking |
 | [Diagrams](./architecture/DIAGRAMS.md) | C4 context, container, data flow, sequence |
 | [Unknowns](./architecture/unknowns.md) | Gaps and unresolved ambiguities |
 
@@ -120,12 +123,12 @@ Use exactly this structure:
 
 | Repo | Description |
 |---|---|
-| [RepoName](./Repos/RepoName/) | One-line description |
+| RepoName | One-line description |
 ```
 
 Rules:
 - Keep descriptions in the Quick Links table short and distinct — one phrase each
-- List every repo discovered under `Repos/` in the Repositories table
+- List every repo discovered under `Repos/` in the Repositories table — repo names only, no links (the docs repo does not contain the source repos)
 - If a `README.md` already exists, update only the architecture sections. Preserve any content not related to architecture.
 
 ---
@@ -155,6 +158,7 @@ Then include a **Supporting Documents** section with relative links to:
 - `./ai-architecture.md`
 - `./failure-strategy.md`
 - `./observability.md`
+- `./devops.md`
 - `./unknowns.md`
 - `./agent-summary.md`
 
@@ -188,6 +192,7 @@ Also populate these focused files at the paths defined in ARCH_CONFIG.md:
 - **ai-architecture** — models, agent roles, orchestration patterns, AI integration points
 - **failure-strategy** — failure points, retry expectations, idempotency requirements, missing protections
 - **observability** — logging, telemetry, correlation, metrics, monitoring gaps
+- **devops** — CI/CD pipelines, IaC, environments, deployment strategy, networking, security infrastructure, DR
 - **unknowns** — all unknowns and unresolved ambiguities
 - **agent-summary** — concise machine-friendly summary of purpose, entities, flows, and constraints
 

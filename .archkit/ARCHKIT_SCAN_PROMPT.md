@@ -25,6 +25,7 @@
 - [STEP 11 — Failure, Retry & Idempotency](#step-11--failure-retry--idempotency)
 - [STEP 12 — AI Architecture](#step-12--ai-architecture)
 - [STEP 13 — Observability & Metrics](#step-13--observability--metrics)
+- [STEP 14 — DevOps & Infrastructure](#step-14--devops--infrastructure)
 - [STEP 8 — Produce the Architecture Document](#step-8--produce-the-architecture-document)
 - [STEP 9 — Produce Mermaid Diagrams](#step-9--produce-mermaid-diagrams)
 - [STEP 10 — Confidence Assessment](#step-10--confidence-assessment)
@@ -71,6 +72,7 @@ Minimum required outputs (paths from ARCH_CONFIG.md):
 * AI architecture
 * Failure strategy
 * Observability
+* DevOps & infrastructure
 * Unknowns
 * Agent summary
 
@@ -108,6 +110,7 @@ Create or update `docs/README.md`. Use exactly this structure:
 | [AI Architecture](./architecture/ai-architecture.md) | AI models, agents, and orchestration |
 | [Failure Strategy](./architecture/failure-strategy.md) | Failure points, retry behaviour, idempotency gaps |
 | [Observability](./architecture/observability.md) | Logging, telemetry, monitoring gaps |
+| [DevOps & Infrastructure](./architecture/devops.md) | CI/CD, IaC, environments, deployment, networking |
 | [Diagrams](./architecture/DIAGRAMS.md) | C4 context, container, data flow, sequence |
 | [Unknowns](./architecture/unknowns.md) | Gaps and unresolved ambiguities |
 
@@ -115,12 +118,12 @@ Create or update `docs/README.md`. Use exactly this structure:
 
 | Repo | Description |
 |---|---|
-| [RepoName](./Repos/RepoName/) | One-line description |
+| RepoName | One-line description |
 ```
 
 Rules:
 - Keep descriptions in the Quick Links table short and distinct — one phrase each
-- List every repo discovered under `Repos/` in the Repositories table
+- List every repo discovered under `Repos/` in the Repositories table — repo names only, no links (the docs repo does not contain the source repos)
 - If a `README.md` already exists, update only the architecture sections. Preserve any unrelated content.
 
 ### Table of Contents Requirement
@@ -361,6 +364,33 @@ docs/architecture/observability.md
 
 ---
 
+## 🔴 STEP 14 — DevOps & Infrastructure
+
+Document:
+
+* CI/CD pipelines — build, test, deploy steps; triggers; environments targeted
+* Infrastructure as Code — tool (Bicep, Terraform, Pulumi, etc.), structure, what it provisions
+* Environments — dev, staging, prod; how they differ; promotion strategy
+* Deployment strategy — rolling, blue/green, canary, container vs App Service vs serverless
+* Networking — VNet, subnets, DNS, CDN, load balancers, ingress rules
+* Security infrastructure — Key Vault, managed identities, RBAC, WAF, private endpoints
+* Disaster recovery & backup — RPO/RTO targets, backup schedules, failover strategy
+* Cost & resource sizing — SKUs, scaling config, notable cost drivers
+
+Mark:
+
+* [OBSERVED] — directly confirmed in IaC or CI/CD files
+* [INFERRED] — reasonably inferred from patterns
+* [UNKNOWN — reason] — not determinable from code provided
+
+Write to:
+
+```
+docs/architecture/devops.md
+```
+
+---
+
 ## STEP 8 — Produce the Architecture Document
 
 Write to:
@@ -386,6 +416,7 @@ Include:
 * [AI Architecture](./ai-architecture.md)
 * [Failure Strategy](./failure-strategy.md)
 * [Observability](./observability.md)
+* [DevOps & Infrastructure](./devops.md)
 * [Unknowns](./unknowns.md)
 * [Agent Summary](./agent-summary.md)
 
