@@ -37,6 +37,7 @@
 | Observability | `docs/architecture/observability.md` |
 | Unknowns | `docs/architecture/unknowns.md` |
 | Agent summary | `docs/architecture/agent-summary.md` |
+| DevOps & infrastructure | `docs/architecture/devops.md` |
 | Feature design | `docs/features/[feature-name].md` |
 | Architecture decision (ADR) | `docs/decisions/ADR-[number]-[kebab-title].md` |
 
