@@ -1,0 +1,10 @@
+{
+  "name": "archkit",
+  "version": "0.1.0",
+  "description": "Architecture intelligence for AI-driven development — scan repos, design features, create ADRs, and reconcile drift.",
+  "author": {
+    "name": "Dawid Snyman",
+    "email": "dawid@digitide.co.nz"
+  },
+  "repository": "https://github.com/Komentis/ArcKit"
+}
