@@ -8,8 +8,9 @@
 ## Table of Contents
 
 - [Commandment Enforcement](#commandment-enforcement)
+- [Document Layer Rules](#document-layer-rules)
 - [Output Structure Requirement](#output-structure-requirement)
-  - [Requirements for README.md](#requirements-for-readmemd)
+  - [Requirements for docs/README.md](#requirements-for-docsreadmemd)
   - [Table of Contents Requirement](#table-of-contents-requirement)
 - [STEP 1 — Understand What You Have Been Given](#step-1--understand-what-you-have-been-given)
 - [STEP 2 — Pass 1: Structural Scan](#step-2--pass-1-structural-scan)
@@ -25,11 +26,12 @@
 - [STEP 11 — Failure, Retry & Idempotency](#step-11--failure-retry--idempotency)
 - [STEP 12 — AI Architecture](#step-12--ai-architecture)
 - [STEP 13 — Observability & Metrics](#step-13--observability--metrics)
-- [STEP 14 — DevOps & Infrastructure](#step-14--devops--infrastructure)
-- [STEP 8 — Produce the Architecture Document](#step-8--produce-the-architecture-document)
-- [STEP 9 — Produce Mermaid Diagrams](#step-9--produce-mermaid-diagrams)
-- [STEP 10 — Confidence Assessment](#step-10--confidence-assessment)
-- [STEP 11 — Agent Summary](#step-11--agent-summary)
+- [STEP 14 — DevOps & CI/CD](#step-14--devops--cicd)
+- [STEP 15 — Infrastructure](#step-15--infrastructure)
+- [STEP 16 — Produce the Architecture Document](#step-16--produce-the-architecture-document)
+- [STEP 17 — Produce Mermaid Diagrams](#step-17--produce-mermaid-diagrams)
+- [STEP 18 — Confidence Assessment](#step-18--confidence-assessment)
+- [STEP 19 — Agent Summary](#step-19--agent-summary)
 - [OUTPUT FORMAT](#output-format)
 - [IMPORTANT RULES](#important-rules)
 
@@ -57,6 +59,24 @@ Before proceeding, explicitly acknowledge:
 
 ---
 
+## 🔴 Document Layer Rules
+
+ArchKit output is split into two layers. You MUST apply these rules to every file you produce:
+
+### Conceptual layer (stable)
+
+Files: `docs/architecture/system-intent.md`, `docs/architecture/domain-model.md`, `docs/architecture/DIAGRAMS.md`
+
+**Rule**: Only regenerate these files if the **fundamental architecture** has changed — new bounded contexts, major flow redesign, strategic domain model shift. Do **NOT** regenerate them for routine code changes (bug fixes, new endpoints, dependency upgrades, refactors). If existing versions of these files were provided and the architecture has not fundamentally changed, **omit them from your output** (no FILE marker = no change).
+
+### Implementation layer (updated on code changes)
+
+Files: `docs/architecture/ARCHITECTURE.md`, `docs/architecture/agent-summary.md`, `docs/architecture/ai-architecture.md`, `docs/architecture/failure-strategy.md`, `docs/architecture/observability.md`, `docs/architecture/state-machines.md`, `docs/architecture/devops.md`, `docs/architecture/infrastructure.md`, `docs/architecture/unknowns.md`
+
+**Rule**: Regenerate these files whenever relevant code has changed or the file is missing. They reflect the current as-built state of the system.
+
+---
+
 ## 🔴 Output Structure Requirement
 
 All output paths come from **ARCH_CONFIG.md**. Read that file before writing anything.
@@ -72,7 +92,8 @@ Minimum required outputs (paths from ARCH_CONFIG.md):
 * AI architecture
 * Failure strategy
 * Observability
-* DevOps & infrastructure
+* DevOps & CI/CD
+* Infrastructure
 * Unknowns
 * Agent summary
 
@@ -92,26 +113,61 @@ Create or update `docs/README.md`. Use exactly this structure:
 
 ## Table of Contents
 
+- [Conceptual Design](#conceptual-design)
 - [Architecture Documentation](#architecture-documentation)
-- [Quick Links](#quick-links)
 - [Repositories](#repositories)
+
+## Conceptual Design
+
+> Stable. Changes only when the fundamental architecture changes.
+
+[Write 3–5 sentences describing the system's purpose, its primary actors, and how the major parts fit together. Use plain language. No implementation detail.]
+
+### System Context
+
+[Write 2–3 sentences explaining how this system fits into the broader organisational landscape — who uses it, what external systems it integrates with, and what value it delivers.]
+
+```mermaid
+C4Context
+  title System Context — [System Name]
+  [Produce a C4 Context diagram here — actors on the left, the system in the centre, external systems on the right]
+```
+
+### System Overview
+
+[Write 2–4 sentences describing the major subsystems or bounded contexts and how they interact at a high level.]
+
+```mermaid
+C4Container
+  title Container Diagram — [System Name]
+  [Produce a C4 Container diagram here — one box per major service/component, showing the primary communication paths]
+```
+
+### Design Principles
+
+[List 3–6 bullet points capturing the key architectural decisions and constraints that shape this system. Examples: event-driven, eventual consistency, CQRS, AI-first, stateless services, etc.]
+
+- [Principle 1]
+- [Principle 2]
+- [Principle 3]
 
 ## Architecture Documentation
 
-- [Architecture Overview](./architecture/ARCHITECTURE.md) — main entry point
-
-## Quick Links
+> Updated whenever code changes. Reflects the current as-built state.
 
 | Document | Description |
 |---|---|
 | [Architecture Overview](./architecture/ARCHITECTURE.md) | System summary, service map, communication map |
+| [System Intent](./architecture/system-intent.md) | Purpose, design principles, bounded contexts |
 | [Domain Model](./architecture/domain-model.md) | Core business entities and relationships |
-| [State Machines](./architecture/state-machines.md) | Lifecycle states and transitions |
-| [AI Architecture](./architecture/ai-architecture.md) | AI models, agents, and orchestration |
+| [Diagrams](./architecture/DIAGRAMS.md) | Full C4 diagrams, data flow, sequence diagrams |
+| [Agent Summary](./architecture/agent-summary.md) | AI agents, roles, and orchestration |
+| [AI Architecture](./architecture/ai-architecture.md) | AI models, prompts, and integration patterns |
 | [Failure Strategy](./architecture/failure-strategy.md) | Failure points, retry behaviour, idempotency gaps |
 | [Observability](./architecture/observability.md) | Logging, telemetry, monitoring gaps |
-| [DevOps & Infrastructure](./architecture/devops.md) | CI/CD, IaC, environments, deployment, networking |
-| [Diagrams](./architecture/DIAGRAMS.md) | C4 context, container, data flow, sequence |
+| [State Machines](./architecture/state-machines.md) | Lifecycle states and transitions |
+| [DevOps & CI/CD](./architecture/devops.md) | Pipelines, deployment strategy, environments |
+| [Infrastructure](./architecture/infrastructure.md) | Cloud resources, networking, IaC, security, DR |
 | [Unknowns](./architecture/unknowns.md) | Gaps and unresolved ambiguities |
 
 ## Repositories
@@ -122,9 +178,14 @@ Create or update `docs/README.md`. Use exactly this structure:
 ```
 
 Rules:
-- Keep descriptions in the Quick Links table short and distinct — one phrase each
-- List every repo discovered under `Repos/` in the Repositories table — repo names only, no links (the docs repo does not contain the source repos)
-- If a `README.md` already exists, update only the architecture sections. Preserve any unrelated content.
+- The **Conceptual Design** section MUST appear before Architecture Documentation — do not reorder.
+- The Conceptual Design section contains **actual prose and Mermaid diagrams inline** — not links to other documents. Write the content directly in the README.
+- The Mermaid diagrams in the README are **high-level summaries only** (C4 Context + C4 Container). Full diagrams with all detail go in `docs/architecture/DIAGRAMS.md`.
+- **Conceptual Design stability rule**: If an existing `docs/README.md` is provided and the fundamental architecture has **not** changed (no new bounded contexts, no major flow redesign), preserve the existing Conceptual Design section prose and diagrams exactly — do not rewrite them. Only update the Architecture Documentation table.
+- Design Principles must reflect what you actually observed in the codebase — do not invent generic principles.
+- Keep descriptions in the Architecture Documentation table short and distinct — one phrase each.
+- List every repo discovered under `Repos/` in the Repositories table — repo names only, no links (the docs repo does not contain the source repos).
+- If a `docs/README.md` already exists, update only the architecture sections. Preserve any unrelated content.
 
 ### Table of Contents Requirement
 
@@ -364,22 +425,18 @@ docs/architecture/observability.md
 
 ---
 
-## 🔴 STEP 14 — DevOps & Infrastructure
+## 🔴 STEP 14 — DevOps & CI/CD
 
-Document:
+Document CI/CD and deployment only — do NOT include infrastructure provisioning here (that goes in STEP 15).
 
 * CI/CD pipelines — build, test, deploy steps; triggers; environments targeted
-* Infrastructure as Code — tool (Bicep, Terraform, Pulumi, etc.), structure, what it provisions
-* Environments — dev, staging, prod; how they differ; promotion strategy
 * Deployment strategy — rolling, blue/green, canary, container vs App Service vs serverless
-* Networking — VNet, subnets, DNS, CDN, load balancers, ingress rules
-* Security infrastructure — Key Vault, managed identities, RBAC, WAF, private endpoints
-* Disaster recovery & backup — RPO/RTO targets, backup schedules, failover strategy
-* Cost & resource sizing — SKUs, scaling config, notable cost drivers
+* Environments — dev, staging, prod; how they differ; promotion strategy
+* Release process — branching strategy, approval gates, rollback procedure
 
 Mark:
 
-* [OBSERVED] — directly confirmed in IaC or CI/CD files
+* [OBSERVED] — directly confirmed in CI/CD files
 * [INFERRED] — reasonably inferred from patterns
 * [UNKNOWN — reason] — not determinable from code provided
 
@@ -391,7 +448,31 @@ docs/architecture/devops.md
 
 ---
 
-## STEP 8 — Produce the Architecture Document
+## 🔴 STEP 15 — Infrastructure
+
+Document cloud resources, networking, and security infrastructure — do NOT duplicate CI/CD content from STEP 14.
+
+* Cloud resources — resource types, SKUs, scaling config, notable cost drivers
+* Networking — VNet, subnets, DNS, CDN, load balancers, ingress rules
+* Infrastructure as Code — tool (Bicep, Terraform, Pulumi, etc.), structure, what it provisions
+* Security infrastructure — Key Vault, managed identities, RBAC, WAF, private endpoints
+* Disaster recovery & backup — RPO/RTO targets, backup schedules, failover strategy
+
+Mark:
+
+* [OBSERVED] — directly confirmed in IaC files
+* [INFERRED] — reasonably inferred from patterns
+* [UNKNOWN — reason] — not determinable from code provided
+
+Write to:
+
+```
+docs/architecture/infrastructure.md
+```
+
+---
+
+## STEP 16 — Produce the Architecture Document
 
 Write to:
 
@@ -416,7 +497,8 @@ Include:
 * [AI Architecture](./ai-architecture.md)
 * [Failure Strategy](./failure-strategy.md)
 * [Observability](./observability.md)
-* [DevOps & Infrastructure](./devops.md)
+* [DevOps & CI/CD](./devops.md)
+* [Infrastructure](./infrastructure.md)
 * [Unknowns](./unknowns.md)
 * [Agent Summary](./agent-summary.md)
 
@@ -431,7 +513,7 @@ Include:
 * Do NOT duplicate content — link instead
 * Keep concise
 * Ensure links are valid
-* This is the **entry point to the architecture**
+* This is the **detailed implementation overview** — the user entry point is `docs/README.md`
 
 ---
 
@@ -446,7 +528,7 @@ Include:
 
 ---
 
-## STEP 9 — Produce Mermaid Diagrams
+## STEP 17 — Produce Mermaid Diagrams
 
 Write all diagrams as inline ` ```mermaid ` fenced code blocks inside a single file:
 
@@ -463,7 +545,7 @@ For each diagram include:
 
 ---
 
-## STEP 10 — Confidence Assessment
+## STEP 18 — Confidence Assessment
 
 Include inside:
 
@@ -473,7 +555,7 @@ docs/architecture/ARCHITECTURE.md
 
 ---
 
-## 🔴 STEP 11 — Agent Summary
+## 🔴 STEP 19 — Agent Summary
 
 Write to:
 
@@ -494,7 +576,7 @@ Include:
 
 You must:
 
-* Output all files
+* **Only output FILE markers for files that are missing or have changed** based on what you find in the repos. If an existing file is still accurate, do NOT output it — omitting it means "no change needed".
 * Maintain folder structure
 * Ensure consistency across files
 
