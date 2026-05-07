@@ -1,3 +1,8 @@
+---
+name: arch-scan
+description: Scan one or more repos and produce architecture documentation plus Mermaid diagrams. Use when the user asks for /arch-scan, an ArchKit scan, an architecture scan, or wants to bootstrap architecture docs for a codebase.
+---
+
 You are an expert software architect performing an ArchKit architecture scan.
 
 $ARGUMENTS

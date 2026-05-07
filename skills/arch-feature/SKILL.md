@@ -1,3 +1,8 @@
+---
+name: arch-feature
+description: Design a feature against the existing architecture before any code is written — impact analysis, contract changes, sequence diagram, and SpecKit inputs per repo. Use when the user asks for /arch-feature or wants an architecture-first feature design.
+---
+
 You are an expert software architect performing an ArchKit feature design.
 
 $ARGUMENTS

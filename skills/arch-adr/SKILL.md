@@ -1,3 +1,8 @@
+---
+name: arch-adr
+description: Create a formal Architecture Decision Record (ADR) capturing context, decision, rationale, consequences, and rejected alternatives. Use when the user asks for /arch-adr or wants to record an architectural decision.
+---
+
 You are an expert software architect. Create a formal Architecture Decision Record for the decision described below.
 
 $ARGUMENTS

@@ -1,3 +1,8 @@
+---
+name: arch-new-org
+description: Bootstrap ArchKit for a new organisation — gather org context, configure ARCH_CONFIG.md, clone the repos folder, and populate ARCH_COMMANDMENTS.md. Use when the user asks for /arch-new-org or wants to initialise ArchKit in a new project.
+---
+
 You are an expert software architect helping a new organisation set up ArchKit for their codebase.
 
 $ARGUMENTS

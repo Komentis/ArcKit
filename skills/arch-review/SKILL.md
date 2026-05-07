@@ -1,3 +1,8 @@
+---
+name: arch-review
+description: Reconcile architecture docs with code — post-merge reconciliation when given a PR/branch, or drift check across repos when no merge is specified. Use when the user asks for /arch-review, a drift check, or a post-merge architecture review.
+---
+
 You are an expert software architect performing an ArchKit architecture review.
 
 $ARGUMENTS
