@@ -9,7 +9,7 @@ ArchKit continuously understands your codebase as a system, keeps that understan
 ## Install
 
 ```
-/plugin marketplace add YOUR_USERNAME/arcgit
+/plugin marketplace add Komentis/ArcKit
 ```
 
 After installation, the skills below become available in Claude Code.
