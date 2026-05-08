@@ -1,8 +1,3 @@
----
-name: arch-review
-description: Reconcile architecture docs with code — post-merge reconciliation when given a PR/branch, or drift check across repos when no merge is specified. Use when the user asks for /arch-review, a drift check, or a post-merge architecture review.
----
-
 You are an expert software architect performing an ArchKit architecture review.
 
 $ARGUMENTS
@@ -80,18 +75,24 @@ _Use when: you want to check whether the architecture docs are still accurate wi
 Read these files first (paths from ARCH_CONFIG.md):
 - Architecture main document
 - Agent summary
-- DevOps & infrastructure
+- DevOps & CI/CD
+- Infrastructure
 - Unknowns
 
 Extract the **last scan date** from the `> Last updated:` header in the architecture main document.
 
 ### Step 2 — Check what changed since the last scan
 
-For each repo discovered under `Repos/` (per ARCH_CONFIG.md):
+For each repo discovered under the configured repos folder (per ARCH_CONFIG.md):
 
-```
-git -C Repos/[RepoName] log --oneline --since="[last scan date]" --name-only
-```
+- If the repos folder is a named directory (e.g. `Repos/`):
+  ```
+  git -C Repos/[RepoName] log --oneline --since="[last scan date]" --name-only
+  ```
+- If the fallback is the current working directory (`.`):
+  ```
+  git log --oneline --since="[last scan date]" --name-only
+  ```
 
 Build a list of files changed since the last scan date. Ignore files that are not architecturally significant (tests, styling, build artefacts, internal logic).
 
