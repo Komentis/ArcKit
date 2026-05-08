@@ -84,9 +84,9 @@ All file paths come from ARCH_CONFIG.md. Required outputs are:
 - Unknowns
 - Agent summary
 
-### Requirements for `docs/README.md`
+### Requirements for the README in the configured Docs root
 
-Create or update `docs/README.md`. This is the human entry point for anyone navigating the documentation.
+Create or update the `README.md` file in the configured Docs root defined by `@.archkit/ARCH_CONFIG.md`. This is the human entry point for anyone navigating the documentation.
 
 Use exactly this structure:
 
