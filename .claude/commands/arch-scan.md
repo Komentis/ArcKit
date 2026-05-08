@@ -6,9 +6,10 @@ $ARGUMENTS
 
 Before scanning, discover all repositories to include:
 
-1. Look for a `Repos/` directory in the current working directory.
-2. If `Repos/` exists, treat **every immediate subdirectory of `Repos/`** as a separate repository to scan. Scan all of them.
-3. If `Repos/` does not exist, fall back to scanning the current working directory itself.
+1. Read the **Repos Discovery** section of `@.archkit/ARCH_CONFIG.md` to get the configured repos folder (default: `Repos/`).
+2. Look for the configured repos folder in the current working directory.
+3. If it exists, treat **every immediate subdirectory of that folder** as a separate repository to scan. Scan all of them.
+4. If it does not exist (or the configured fallback is the current working directory), scan the current working directory itself.
 
 Treat this as a **Bootstrap Scan** (as defined in `ARCH_SCAN_STRATEGY.md`): structural scan + boundary scan across all repositories, with targeted deep scan only where boundaries are unclear.
 
@@ -30,7 +31,7 @@ Once you have read those files, perform the scan in this order:
 
 1. State your understanding of the system in 2–3 sentences. If anything is unclear, ask one question before proceeding.
 
-2. Run Pass 1 (Structural Scan) — for **each repo discovered in `Repos/`**, read: README, project files, Docker, CI/CD, folder structure. Extract: services, roles, infrastructure footprint per repo. Stop here if you can name every service with HIGH confidence.
+2. Run Pass 1 (Structural Scan) — for **each repo discovered in the configured repos folder**, read: README, project files, Docker, CI/CD, folder structure. Extract: services, roles, infrastructure footprint per repo. Stop here if you can name every service with HIGH confidence.
 
 3. Run Pass 2 (Boundary Scan) — for **each repo**, read: controllers, contracts, events, OpenAPI, startup/DI files. Extract: what each service exposes and consumes, all connections, contract locations. Pay special attention to cross-repo contracts (shared libraries, event schemas, OpenAPI specs consumed between repos).
 
@@ -80,7 +81,8 @@ All file paths come from ARCH_CONFIG.md. Required outputs are:
 - AI architecture
 - Failure strategy
 - Observability
-- DevOps & infrastructure
+- DevOps & CI/CD
+- Infrastructure
 - Unknowns
 - Agent summary
 
@@ -115,7 +117,8 @@ Use exactly this structure:
 | [AI Architecture](./architecture/ai-architecture.md) | AI models, agents, and orchestration |
 | [Failure Strategy](./architecture/failure-strategy.md) | Failure points, retry behaviour, idempotency gaps |
 | [Observability](./architecture/observability.md) | Logging, telemetry, monitoring gaps |
-| [DevOps & Infrastructure](./architecture/devops.md) | CI/CD, IaC, environments, deployment, networking |
+| [DevOps & CI/CD](./architecture/devops.md) | CI/CD pipelines, environments, deployment strategy |
+| [Infrastructure](./architecture/infrastructure.md) | IaC, networking, security infrastructure, DR |
 | [Diagrams](./architecture/DIAGRAMS.md) | C4 context, container, data flow, sequence |
 | [Unknowns](./architecture/unknowns.md) | Gaps and unresolved ambiguities |
 
@@ -128,12 +131,12 @@ Use exactly this structure:
 
 Rules:
 - Keep descriptions in the Quick Links table short and distinct — one phrase each
-- List every repo discovered under `Repos/` in the Repositories table — repo names only, no links (the docs repo does not contain the source repos)
+- List every repo discovered under the configured repos folder in the Repositories table — repo names only, no links (the docs repo does not contain the source repos)
 - If a `README.md` already exists, update only the architecture sections. Preserve any content not related to architecture.
 
 ---
 
-### Requirements for `docs/architecture/ARCHITECTURE.md`
+### Requirements for the Architecture main document
 
 Produce a single combined `.md` file containing, in this order:
 
@@ -168,7 +171,7 @@ Then include a **Diagrams** section with relative links to:
 
 Do not duplicate large sections from the supporting files unnecessarily. `ARCHITECTURE.md` must act as the main entry point and navigation hub.
 
-### Requirements for `docs/architecture/DIAGRAMS.md`
+### Requirements for the Diagrams file
 
 Create a separate file containing only:
 
@@ -192,7 +195,8 @@ Also populate these focused files at the paths defined in ARCH_CONFIG.md:
 - **ai-architecture** — models, agent roles, orchestration patterns, AI integration points
 - **failure-strategy** — failure points, retry expectations, idempotency requirements, missing protections
 - **observability** — logging, telemetry, correlation, metrics, monitoring gaps
-- **devops** — CI/CD pipelines, IaC, environments, deployment strategy, networking, security infrastructure, DR
+- **devops** — CI/CD pipelines, environments, deployment strategy
+- **infrastructure** — IaC, networking, security infrastructure, DR
 - **unknowns** — all unknowns and unresolved ambiguities
 - **agent-summary** — concise machine-friendly summary of purpose, entities, flows, and constraints
 
@@ -219,7 +223,7 @@ If a supporting file cannot be fully completed, still create it and write:
   - [Subsection](#subsection)
 ```
 
-- Always create or update the documentation entry point (`docs/README.md` per ARCH_CONFIG.md) as part of every scan.
+- Always create or update the documentation entry point (path from ARCH_CONFIG.md) as part of every scan.
 
 ---
 
