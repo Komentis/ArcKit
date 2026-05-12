@@ -178,13 +178,15 @@ def _extract_unknowns(markdown: str, source_file: str) -> list[Unknown]:
         reason = match.group("reason").strip()
         unknowns.append(Unknown(description=reason, reason=reason, source_file=source_file))
     # Also collect bullet lines from a section literally called "Unknowns".
+    # Skip bullets containing any [UNKNOWN ...] marker because those are
+    # already captured by the regex pass above.
     in_unknowns = False
     for raw in markdown.splitlines():
         line = raw.strip()
         if line.lower().startswith("## ") or line.lower().startswith("# "):
             in_unknowns = "unknown" in line.lower()
             continue
-        if in_unknowns and line.startswith("- ") and not _UNKNOWN_BARE.search(line):
+        if in_unknowns and line.startswith("- ") and "[UNKNOWN" not in line.upper():
             unknowns.append(Unknown(description=line[2:].strip(), source_file=source_file))
     return unknowns
 
