@@ -174,7 +174,16 @@ def _check_service_table_confidence(rel: str, text: str, issues: list[Issue]) ->
         j = i + 2
         while j < len(lines) and _TABLE_ROW.match(lines[j]):
             cells = [c.strip() for c in lines[j].strip().strip("|").split("|")]
-            if confidence_idx < len(cells):
+            if confidence_idx >= len(cells):
+                issues.append(
+                    Issue(
+                        severity="error",
+                        file=rel,
+                        line=j + 1,
+                        message="Service table row missing Confidence cell",
+                    )
+                )
+            else:
                 value = cells[confidence_idx].upper()
                 if value not in {"HIGH", "MEDIUM", "LOW"}:
                     issues.append(
