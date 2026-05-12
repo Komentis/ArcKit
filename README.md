@@ -14,6 +14,7 @@ ArchKit continuously understands your codebase as a system, keeps that understan
 - [Quick start](#quick-start)
 - [Workspace layout](#workspace-layout)
 - [Configuration](#configuration)
+- [Verify](#verify)
 - [Reference](#reference)
 - [Core principle](#core-principle)
 
@@ -134,6 +135,32 @@ This split keeps the conceptual story stable across routine code changes while k
 
 ---
 
+## Verify
+
+ArchKit ships with a deterministic verification layer — a small Python package that parses the generated docs into a structured fact model, validates discipline markers, and lints the embedded Mermaid blocks.
+
+```bash
+python -m archkit verify docs/
+```
+
+This is what makes the anti-hallucination guarantees enforceable rather than aspirational:
+
+- Every claim must carry `[OBSERVED]`, `[INFERRED]`, `[UNKNOWN — reason]`, or `[CLARIFIED]`
+- Service tables must have a Confidence column with `HIGH`/`MEDIUM`/`LOW`
+- No stub placeholders (`[TBD]`, `[FILL …]`, `???`) may survive
+- Mermaid blocks must declare a valid diagram type and have balanced brackets / well-formed arrows
+- Two runs over the same codebase produce diffable JSON fact models (`python -m archkit parse docs/ -o out.json`)
+
+Zero dependencies; Python 3.10+. See [archkit/README.md](./archkit/README.md) for the full check list.
+
+Run the test suite with:
+
+```bash
+python -m unittest discover -s archkit/tests
+```
+
+---
+
 ## Reference
 
 | File | Purpose |
@@ -147,6 +174,7 @@ This split keeps the conceptual story stable across routine code changes while k
 | [.archkit/ARCHKIT_CLARIFY_PROMPT.md](./.archkit/ARCHKIT_CLARIFY_PROMPT.md) | Targeted clarification of open unknowns |
 | [.archkit/ARCH_COMMANDMENTS_TEMPLATE.md](./.archkit/ARCH_COMMANDMENTS_TEMPLATE.md) | Template for creating org-specific commandments |
 | [.archkit/QUICKSTART.md](./.archkit/QUICKSTART.md) | Full usage guide |
+| [archkit/README.md](./archkit/README.md) | Deterministic verification CLI — what it checks, how to run it |
 | [START_HERE.md](./START_HERE.md) | File checklist for collecting repo context before scanning |
 
 ---
