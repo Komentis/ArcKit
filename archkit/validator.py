@@ -31,11 +31,11 @@ class Issue:
 
 _STUB_PATTERNS = [
     re.compile(r"\[TBD\]", re.IGNORECASE),
-    re.compile(r"\[FILL[\w ]*\]", re.IGNORECASE),
-    re.compile(r"\[INSERT[\w ]*\]", re.IGNORECASE),
-    re.compile(r"\[NUMBER\]"),
-    re.compile(r"\[DATE\]"),
-    re.compile(r"\[TODO[\w :]*\]", re.IGNORECASE),
+    re.compile(r"\[FILL[^\]]*\]", re.IGNORECASE),
+    re.compile(r"\[INSERT[^\]]*\]", re.IGNORECASE),
+    re.compile(r"\[NUMBER\]", re.IGNORECASE),
+    re.compile(r"\[DATE\]", re.IGNORECASE),
+    re.compile(r"\[TODO[^\]]*\]", re.IGNORECASE),
     re.compile(r"\?{3,}"),
 ]
 
