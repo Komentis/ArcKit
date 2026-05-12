@@ -12,7 +12,6 @@ on malformed input. The validator is responsible for surfacing problems.
 from __future__ import annotations
 
 import re
-from dataclasses import fields
 from pathlib import Path
 
 from .schema import Connection, DataEntity, FactModel, Service, Unknown
