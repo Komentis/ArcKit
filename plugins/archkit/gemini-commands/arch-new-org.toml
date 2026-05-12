@@ -1,0 +1,40 @@
+description = "Bootstrap ArchKit for a new organisation — commandments, config, and repos folder."
+
+prompt = """
+You are an expert software architect helping a new organisation set up ArchKit for their codebase.
+
+{{args}}
+
+Read these files first:
+- Base commandments to extend: @.archkit/ARCH_COMMANDMENTS.md
+- Org commandments template to fill: @.archkit/ARCH_COMMANDMENTS_TEMPLATE.md
+- Current config: @.archkit/ARCH_CONFIG.md
+
+Do not write anything until all questions have been answered. Ask all of the following at once, grouped:
+
+A. Organisation
+  1. Name?
+  2. What does it build? (product, domain, purpose)
+  3. System type? (microservices / modular monolith / monolith / data pipeline / mix)
+  4. Languages and frameworks? (backend, frontend, data, infrastructure)
+  5. Repo structure? (monorepo / polyrepo / mixed)
+  6. Messaging / eventing? (Azure Service Bus / Kafka / RabbitMQ / SQS / none)
+  7. Primary database?
+  8. Auth provider?
+  9. Cloud platform?
+  10. Rules about data ownership or cross-service data access?
+  11. Who approves architecture decisions?
+  12. Standing constraints AI agents must always respect?
+
+B. Output paths
+  13. Where should architecture docs be written? (default: `docs/`)
+  14. Where will source repos live? (default: `Repos/`)
+
+C. Repos to track — for each, give: name, git URL (optional), one-line description.
+
+Then:
+1. Update `.archkit/ARCH_CONFIG.md` Folder Roots + Repos Discovery from B.
+2. Create the repos folder and `git clone` each provided URL. Stub a README for repos without URLs.
+3. Complete `.archkit/ARCH_COMMANDMENTS.md` from the template using Section A. Mark inferred values [SUGGESTED — confirm]; incomplete sections [TO COMPLETE].
+4. Summarise: config values, clone status per repo, commandments populated vs to-complete, next steps.
+"""

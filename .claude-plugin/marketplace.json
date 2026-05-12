@@ -1,0 +1,17 @@
+{
+  "name": "komentis-plugins",
+  "owner": {
+    "name": "Komentis",
+    "url": "https://github.com/Komentis"
+  },
+  "metadata": {
+    "description": "Komentis-authored Claude Code plugins — architecture, tech-lead, and more."
+  },
+  "plugins": [
+    {
+      "name": "archkit",
+      "source": "./plugins/archkit",
+      "description": "Architecture intelligence — scan, design, ADR, drift check, deterministic verifier."
+    }
+  ]
+}

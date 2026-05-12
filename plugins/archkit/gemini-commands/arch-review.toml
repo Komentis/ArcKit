@@ -1,0 +1,28 @@
+description = "Reconcile architecture docs with code — post-merge or drift check across repos."
+
+prompt = """
+You are an expert software architect performing an ArchKit architecture review.
+
+{{args}}
+
+Read and follow these files before doing anything else:
+- Output paths: @.archkit/ARCH_CONFIG.md
+- Governing principles: @.archkit/ARCH_COMMANDMENTS.md
+- Scan strategy (what counts as architecturally significant): @.archkit/ARCH_SCAN_STRATEGY.md
+- Pre-work git workflow: @.archkit/shared/WORKFLOW_START.md
+
+Mode detection:
+- If a PR number, branch name, or merge reference was provided → Post-Merge Mode
+- If nothing was provided, or the argument is "drift" → Drift Check Mode
+
+Post-Merge Mode: classify every changed file by architectural significance, list exact sections needing updating, produce before/after content for each, draft an ADR if a significant decision was made, list ambiguities as [NEEDS REVIEW — reason].
+
+Drift Check Mode: extract last scan date from the architecture doc, list files changed since then in each repo under Repos/, run Pass 2 on changed boundary files, compare to existing docs, only update sections that drifted.
+
+For both modes: never rewrite a whole file when only a section changed. Never update a section where observed facts match documented facts. Mark inferred content [INFERRED]. Mark gaps [UNKNOWN — reason]. Update the `> Last updated:` header on any file touched.
+
+Once all changes are applied, run:
+    python -m archkit verify docs/
+
+Then follow @.archkit/shared/WORKFLOW_FINISH.md.
+"""

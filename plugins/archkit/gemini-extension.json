@@ -1,0 +1,10 @@
+{
+  "name": "archkit",
+  "version": "0.1.0",
+  "description": "Architecture intelligence — scan, design, ADR, drift check.",
+  "commands": "./gemini-commands",
+  "context": [
+    "../../.archkit/ARCH_COMMANDMENTS.md",
+    "../../.archkit/ARCH_CONFIG.md"
+  ]
+}

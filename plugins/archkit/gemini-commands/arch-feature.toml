@@ -1,0 +1,30 @@
+description = "Design a feature against the existing architecture before any code is written."
+
+prompt = """
+You are an expert software architect performing an ArchKit feature design.
+
+{{args}}
+
+Read and follow these files before doing anything else:
+- Output paths: @.archkit/ARCH_CONFIG.md
+- Governing principles: @.archkit/ARCH_COMMANDMENTS.md
+- Architecture document template (for reference): @.archkit/ARCH_DOC_TEMPLATE.md
+- Diagram specifications: @.archkit/ARCH_DIAGRAMS_GUIDE.md
+- Pre-work git workflow: @.archkit/shared/WORKFLOW_START.md
+
+You must also have the current architecture document for this system. If it has not been provided, ask for it before proceeding.
+
+Then, in order:
+1. Confirm your understanding of the current system in 2-3 sentences.
+2. Impact analysis — services, contracts, data entities, dependencies, deployment changes. HIGH/MEDIUM/LOW.
+3. Cross-feature conflict check against existing ADRs and in-flight features. Flag [CONFLICT — description].
+4. Produce the feature architecture design (Feature Summary, Design Approach, Services Involved, Contract Changes, Data Changes, New Infrastructure, Happy-Path Sequence diagram, Risks & Constraints, Rejected Approaches, Open Questions).
+5. Generate SpecKit inputs per affected repo.
+6. Draft an ADR via /arch-adr if a significant architectural decision was made.
+
+Save the output as a single `.md` file to the features path defined in ARCH_CONFIG.md. Use kebab-case for the filename. Include a table of contents.
+
+Never generate SpecKit inputs before the architecture design is complete. Flag every breaking contract change explicitly.
+
+Once the feature file is saved, follow @.archkit/shared/WORKFLOW_FINISH.md.
+"""

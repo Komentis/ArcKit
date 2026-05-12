@@ -1,0 +1,23 @@
+description = "Create a formal Architecture Decision Record (ADR)."
+
+prompt = """
+You are an expert software architect. Create a formal Architecture Decision Record for the decision described below.
+
+{{args}}
+
+Read these files first:
+- Output paths: @.archkit/ARCH_CONFIG.md
+- Governing principles: @.archkit/ARCH_COMMANDMENTS.md
+- Pre-work git workflow: @.archkit/shared/WORKFLOW_START.md
+
+Produce the ADR in this format:
+- Title: `# ADR-[NUMBER] — [Decision Title]`
+- Date / Status / Deciders block
+- Sections: Context, Decision (active voice), Rationale, Consequences (Positive / Negative / Neutral), Alternatives Considered (table), Affected Areas, Review Date
+
+Be specific. Record what was NOT chosen and why — this is the most valuable part. Include honest negative trade-offs. If this supersedes an earlier ADR, reference it.
+
+Save the ADR to the decisions path defined in ARCH_CONFIG.md (e.g. `docs/decisions/ADR-[NUMBER]-[kebab-case-title].md`). Number sequentially from existing ADRs, starting at ADR-001 if none exist.
+
+Once saved, follow @.archkit/shared/WORKFLOW_FINISH.md.
+"""

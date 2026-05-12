@@ -1,8 +1,27 @@
-# ArchKit
+# Komentis Plugins
 
-> Architecture intelligence for AI-driven development.
+> A multi-tool marketplace of Claude Code and Gemini CLI plugins for AI-driven engineering work.
 
-ArchKit continuously understands your codebase as a system, keeps that understanding current, and uses it to design features correctly before implementation begins.
+This repo is structured as a **plugin marketplace**. The flagship plugin is **ArchKit** (architecture intelligence). More plugins (e.g. `techlead`) live alongside it under `plugins/`.
+
+---
+
+## Repo layout
+
+```
+.claude-plugin/marketplace.json   ← lists every plugin (Claude Code marketplace)
+plugins/
+  archkit/                        ← architecture scan/design/ADR/review + verifier
+    .claude-plugin/plugin.json    ← Claude Code wrapper
+    skills/<name>/SKILL.md
+    gemini-extension.json         ← Gemini CLI wrapper
+    gemini-commands/*.toml
+  techlead/                       ← placeholder for the Tech Lead orchestrator
+.archkit/                         ← canonical prompts, configs, templates (tool-neutral)
+archkit/                          ← Python verifier (works with either agent)
+```
+
+Each plugin folder holds **two thin wrappers** — one for Claude Code, one for Gemini CLI — around a single canonical body of prompts that lives at the repo root. The Python verifier is tool-agnostic and runs from the repo root regardless of which agent did the scan.
 
 ---
 
@@ -22,14 +41,24 @@ ArchKit continuously understands your codebase as a system, keeps that understan
 
 ## Install
 
-ArchKit ships as a Claude Code plugin.
+### Claude Code
 
 ```
 /plugin marketplace add Komentis/ArcKit
 /plugin install archkit
 ```
 
-The five slash commands below become available in Claude Code.
+Other plugins from this marketplace install the same way: `/plugin install <name>`.
+
+### Gemini CLI
+
+Each plugin under `plugins/` is also a Gemini extension. From the repo root:
+
+```
+gemini extensions install plugins/archkit
+```
+
+The same five commands become available in Gemini CLI. (Other plugins install the same way: `gemini extensions install plugins/<name>`.)
 
 ---
 

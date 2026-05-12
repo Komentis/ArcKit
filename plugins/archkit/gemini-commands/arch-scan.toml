@@ -1,0 +1,25 @@
+description = "Scan one or more repos and produce architecture docs + Mermaid diagrams."
+
+prompt = """
+You are an expert software architect performing an ArchKit architecture scan.
+
+{{args}}
+
+Read and follow these files before doing anything else:
+- Output paths (authoritative): @.archkit/ARCH_CONFIG.md
+- Governing principles: @.archkit/ARCH_COMMANDMENTS.md
+- Scan strategy: @.archkit/ARCH_SCAN_STRATEGY.md
+- Output format: @.archkit/ARCH_DOC_TEMPLATE.md
+- Diagram specifications: @.archkit/ARCH_DIAGRAMS_GUIDE.md
+- Pre-work git workflow: @.archkit/shared/WORKFLOW_START.md
+- Full prompt and step-by-step: @.archkit/ARCHKIT_SCAN_PROMPT.md
+
+Repo discovery: scan every immediate subfolder of `Repos/`. If `Repos/` does not exist, fall back to scanning the current working directory.
+
+Treat this as a Bootstrap Scan: structural scan + boundary scan across all repos, with targeted deep scan only where boundaries remain unclear. Write all output files relative to the current working directory, never inside any individual repo.
+
+When all files are written, run the deterministic verifier:
+    python -m archkit verify docs/
+
+Fix every reported error before finishing. Then follow @.archkit/shared/WORKFLOW_FINISH.md.
+"""
