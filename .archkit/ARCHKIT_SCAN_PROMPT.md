@@ -244,7 +244,7 @@ Now inspect files that define what each service exposes and consumes. Do not rea
 - Controllers/, Endpoints/, Routes/
 - OpenAPI / Swagger / proto / GraphQL schema files
 - Contracts/, Dtos/, Events/, Messages/ folders
-- Application startup and dependency injection files (Program.cs, app.module.ts, etc.)
+- Application startup and dependency injection files (Program.cs, main.py, main.go, server.js, app.module.ts, application.yml, etc.)
 - API client definitions and HTTP client configurations
 - Queue/topic configuration and subscription definitions
 

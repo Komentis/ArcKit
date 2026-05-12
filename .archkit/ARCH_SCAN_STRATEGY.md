@@ -106,10 +106,10 @@ Pass 3: Targeted Deep     →   implementation detail, only when required
 
 | File type | Examples |
 |---|---|
-| API surfaces | Controllers/, Endpoints/, Routes/, Program.cs (route registration) |
-| Contracts | OpenAPI/Swagger files, proto files, GraphQL schema |
-| DTOs and events | Contracts/, Dtos/, Events/, Messages/, Payloads/ |
-| Startup/DI | Startup.cs, Program.cs, DI registration files, app.module.ts |
+| API surfaces | Controllers/, Endpoints/, Routes/, routers/, handlers/, urls.py, main.py route table, Program.cs route registration |
+| Contracts | OpenAPI/Swagger files, proto files, GraphQL schema, JSON Schema, Pydantic/Zod/Joi models |
+| DTOs and events | Contracts/, Dtos/, Events/, Messages/, Payloads/, schemas/, models/ |
+| Startup/DI | Program.cs, Startup.cs, main.py, main.go, server.js/server.ts, app.module.ts, manage.py, application.yml, Module bootstrap files |
 | Clients | API client definitions, HTTP client configurations |
 | Integration config | Queue/topic configuration, subscription definitions |
 | Interfaces | Repository interfaces, service interfaces |
@@ -190,12 +190,16 @@ The bot uses known conventions to guide scanning instead of rediscovering struct
 | Stack | Boundary signals |
 |---|---|
 | .NET API | Controllers/, Program.cs, DI registration, shared contract .csproj |
-| Node.js / Express | routes/, app.js, route definitions, middleware registration |
-| NestJS | modules, controllers, providers, decorators |
 | Angular | app.routes.ts, feature modules, service clients, store/ |
-| React / Next.js | pages/, app/router, API route files |
+| Go / chi / gin | router setup in main.go, handler packages, proto definitions |
+| Java / Spring Boot | @RestController classes, application.yml, Spring config, JPA entities |
+| NestJS | modules, controllers, providers, decorators |
+| Node.js / Express | routes/, app.js, route definitions, middleware registration |
+| Python / Django | urls.py, views.py, serializers.py, settings.py |
 | Python / FastAPI | routers/, main.py, dependency injection, Pydantic models |
-| Infrastructure | infra/, deploy/, Bicep, Terraform, Docker, pipeline YAML |
+| React / Next.js | pages/, app/router, API route files |
+| Ruby on Rails | config/routes.rb, controllers/, models/, ActiveRecord migrations |
+| Infrastructure | infra/, deploy/, Terraform / Bicep / Pulumi / CDK, Docker, pipeline YAML |
 
 ---
 
@@ -217,7 +221,7 @@ For merge-to-main updates:
 |---|---|
 | OpenAPI / Swagger spec | API docs, contract map, Container diagram |
 | Shared DTO / contract class | Contracts map, impacted repo docs |
-| Infrastructure (Bicep/Terraform) | Infra overview, deployment diagram |
+| Infrastructure (Terraform / Bicep / Pulumi / CDK) | Infra overview, deployment diagram |
 | docker-compose.yml | Container diagram, service list |
 | New Controller / Route | Service API surface, boundary docs |
 | New service project added | Service map, Container diagram |

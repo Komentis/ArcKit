@@ -1,2 +1,5 @@
 /Repos
 /docs
+__pycache__/
+*.pyc
+*.pyo

@@ -12,24 +12,30 @@
 
 ## Steps
 
-1. Navigate to the docs root directory (path from ARCH_CONFIG.md, e.g. `cd docs/`).
+1. Run the deterministic verifier against the docs root (path from ARCH_CONFIG.md):
+   ```
+   python -m archkit verify docs/
+   ```
+   Fix every reported **error** before continuing. Warnings are advisory but should be reviewed.
 
-2. Stage all changes:
+2. Navigate to the docs root directory (e.g. `cd docs/`).
+
+3. Stage all changes:
    ```
    git add .
    ```
 
-3. Compose a commit message that summarises what was produced. Be specific — name the system, the type of work, and the key findings or files changed. Then commit:
+4. Compose a commit message that summarises what was produced. Be specific — name the system, the type of work, and the key findings or files changed. Then commit:
    ```
    git commit -m "{summary}"
    ```
 
-4. Push the branch:
+5. Push the branch:
    ```
    git push -u origin {branch-name}
    ```
 
-5. Create a pull request to `main`. Use the PR description format below.
+6. Create a pull request to `main`. Use the PR description format below.
 
 ---
 

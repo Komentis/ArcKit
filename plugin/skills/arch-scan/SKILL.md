@@ -18,7 +18,7 @@ Before scanning, discover all repositories to include:
 
 Treat this as a **Bootstrap Scan** (as defined in `ARCH_SCAN_STRATEGY.md`): structural scan + boundary scan across all repositories, with targeted deep scan only where boundaries are unclear.
 
-The output files must always be written relative to the **current working directory** (i.e. the ArcKit root), not inside any individual repo.
+The output files must always be written relative to the **current working directory** (i.e. the ArchKit workspace root), not inside any individual repo.
 
 ---
 

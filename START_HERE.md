@@ -1,8 +1,8 @@
-# ArchOS
+# ArchKit
 
 Architecture intelligence for AI-driven development.
 
-ArchOS continuously understands your codebase as a system, keeps that understanding
+ArchKit continuously understands your codebase as a system, keeps that understanding
 current, and uses it to design features correctly before implementation begins.
 
 ---
@@ -35,7 +35,7 @@ document and Mermaid diagrams for any repo.
 4. Review the output. Note anything wrong — those corrections improve the prompt
 5. Save the architecture doc to `/docs/` in the repo
 
-See `ArchKit/START_HERE.md` for a detailed checklist of which files to grab.
+See the Reference Docs table below for the detailed checklists.
 
 ---
 
@@ -55,12 +55,12 @@ new dependency, data ownership change):
 
 | File | Purpose |
 |---|---|
-| `ArchKit/ARCH_COMMANDMENTS.md` | The 13 governing principles — everything operates under these |
-| `ArchKit/ARCH_SCAN_STRATEGY.md` | How scanning works: three passes, file prioritisation, scan modes |
-| `ArchKit/ARCH_DOC_TEMPLATE.md` | The output format produced by `/arch-scan` |
-| `ArchKit/ARCH_DIAGRAMS_GUIDE.md` | Mermaid diagram specs — C4 context, container, data flow, sequence |
-| `ArchKit/ARCH_COMMANDMENTS_TEMPLATE.md` | Template for creating org-specific commandments |
-| `ArchKit/QUICKSTART.md` | Full usage guide |
+| `.archkit/ARCH_COMMANDMENTS.md` | The 13 governing principles — everything operates under these |
+| `.archkit/ARCH_SCAN_STRATEGY.md` | How scanning works: three passes, file prioritisation, scan modes |
+| `.archkit/ARCH_DOC_TEMPLATE.md` | The output format produced by `/arch-scan` |
+| `.archkit/ARCH_DIAGRAMS_GUIDE.md` | Mermaid diagram specs — C4 context, container, data flow, sequence |
+| `.archkit/ARCH_COMMANDMENTS_TEMPLATE.md` | Template for creating org-specific commandments |
+| `.archkit/QUICKSTART.md` | Full usage guide |
 
 ---
 
